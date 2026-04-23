@@ -2,39 +2,19 @@ version: "3.9"
 
 services:
   backend:
-    image: node:20-alpine
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
     container_name: archd-backend
-    working_dir: /app/backend
-    environment:
-      ARCHIVE_ACCESS_KEY: ${ARCHIVE_ACCESS_KEY}
-      ARCHIVE_SECRET_KEY: ${ARCHIVE_SECRET_KEY}
-      ARCHIVE_IDENTIFIER_PREFIX: archd-
-      WEBDAV_USER: ${WEBDAV_USER}
-      WEBDAV_PASS: ${WEBDAV_PASS}
     ports:
       - "3001:3001"
-    command: >
-      sh -c "
-      echo 'Backend PWD:' && pwd &&
-      ls -la &&
-      npm install &&
-      node index.js
-      "
     restart: unless-stopped
 
   frontend:
-    image: node:20-alpine
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
     container_name: archd-frontend
-    working_dir: /app/frontend
-    environment:
-      NEXT_PUBLIC_API: http://backend:3001
     ports:
       - "3000:3000"
-    command: >
-      sh -c "
-      echo 'Frontend PWD:' && pwd &&
-      ls -la &&
-      npm install &&
-      npm run dev
-      "
     restart: unless-stopped
