@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0f172a;
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+}
+
+a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+button {
+  background: #38bdf8;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 6px 0;
+  border-radius: 10px;
+  border: none;
+}
+
+.container {
+  padding: 16px;
+}
+
+@media (max-width: 768px) {
+  h1, h2 {
+    font-size: 1.2em;
+  }
+}
