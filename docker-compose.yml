@@ -3,16 +3,14 @@ version: "3.9"
 services:
   backend:
     image: node:20-alpine
-    container_name: archive-backend
-    working_dir: /app
-    volumes:
-      - ./backend:/app
+    container_name: archd-backend
+    working_dir: /app/backend
     environment:
-      ARCHIVE_ACCESS_KEY: "YOUR_ARCHIVE_KEY"
-      ARCHIVE_SECRET_KEY: "YOUR_ARCHIVE_SECRET"
-      ARCHIVE_IDENTIFIER_PREFIX: "anil-fm-"
-      WEBDAV_USER: "anil"
-      WEBDAV_PASS: "strongpassword"
+      ARCHIVE_ACCESS_KEY: ${ARCHIVE_ACCESS_KEY}
+      ARCHIVE_SECRET_KEY: ${ARCHIVE_SECRET_KEY}
+      ARCHIVE_IDENTIFIER_PREFIX: archd-
+      WEBDAV_USER: ${WEBDAV_USER}
+      WEBDAV_PASS: ${WEBDAV_PASS}
     ports:
       - "3001:3001"
     command: sh -c "npm install && node index.js"
@@ -20,12 +18,10 @@ services:
 
   frontend:
     image: node:20-alpine
-    container_name: archive-frontend
-    working_dir: /app
-    volumes:
-      - ./frontend:/app
+    container_name: archd-frontend
+    working_dir: /app/frontend
     environment:
-      NEXT_PUBLIC_API: "http://backend:3001"
+      NEXT_PUBLIC_API: http://backend:3001
     ports:
       - "3000:3000"
     command: sh -c "npm install && npm run dev"
